@@ -1,11 +1,12 @@
-# Check if 'NuGet' is installed on the system. 
+# Check if 'NuGet' is installed on the system.
+# TODO: Figure out why it's not putting out output. 
 function Check_Nuget 
 {
-    if(Get-PackageProvider -ListAvailable | Where-Object {$_.Name -eq "NuGet"} | Out-Null)
+    if(Get-PackageProvider -ListAvailable | Where-Object Name -eq "NuGet" | Out-Null)
     {
         Write-Output "'NuGet' package provider installed. Ignoring. "
     }
-    elseif(Get-PackageProvider -ListAvailable | Where-Object {$_.Name -ne "NuGet"} | Out-Null)
+    elseif(Get-PackageProvider -ListAvailable | Where-Object Name -ne "NuGet" | Out-Null)
     {
         Write-Output "'NuGet' package provider not installed. Installing. "
         Install-PackageProvider -Name NuGet -Force | Out-Null
@@ -15,24 +16,24 @@ function Check_Nuget
 # Check if 'Get-WindowsAutoPilotInfo.ps1' is installed on the system. Install if not already installed. Set path to script in $getHWID_path.
 function Check_GetWindowsAutoPilotInfo 
 {
-    if(Get-InstalledScript | Where-Object {$_.Name -eq "Get-WindowsAutoPilotInfo"} | Out-Null)
+    $req_a0 = Test-Path "C:\Program Files\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1" # When not placing the script into the path, this is where it's located.
+    if($req_a0 -eq $True)
     {
-        Write-Oputput "'Get-WindowsAutoPilotInfo.ps1' script installed. Ignoring."
+        Write-Output "'Get-WindowsAutoPilotInfo.ps1' script installed. Ignoring."
     }
-    elseif(Get-InstalledScript | Where-Object {$_.Name -ne "Get-WindowsAutoPilotInfo"} | Out-Null)
+    elseif($req_a0 -eq $False)
     {
         Write-Output "'Get-WindowsAutoPilotInfo.ps1' script not installed. Installing..."
         Install-Script -Name "Get-WindowsAutoPilotInfo" -Repository 'PSGallery' -Force
     }
 }
 
-# TODO: Move 'HWID' directory to one directory above.
 # Check if directory 'HWID' exists. Create new directory titled 'HWID' if is nonexistant.  
 # Set location to <HWID>
 function Check_Directory 
 {
-    $HWID_dir = $PSScriptRoot + [regex]::escape('\..\HWID')
-    $HWID_dir_exists = Test-Path $HWID_dir | Out-Null
+    $HWID_dir = $PSScriptRoot + "\..\HWID"
+    $HWID_dir_exists = Test-Path $HWID_dir
     if($HWID_dir_exists -eq $False) 
     {
         Write-Output "'HWID\' directory nonexistant. Creating new directory. "
@@ -43,16 +44,21 @@ function Check_Directory
         write-output "'HWID\' directory exists. Ignoring. "
     }
 
-    Set-Location -Path $HWID_dir | Out-Null
+    Set-Location -Path $PSScriptRoot'\..\HWID' | Out-Null
 }
 
+# Get the hardware identification using Get-WindowsAutoPilotInfo and output into file 'AutoPilotHWID.csv'. 
+# Using 'Regex' search for a twelve digit integer and rename 'AutoPilotHWID.csv' to that twelve digit integer number. (eg: 000111222333.csv)
 function Get-HWID
 {
-    C:\'Program Files'\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1 -OutputFile AutoPilotHWID.csv # Get hardware id and send output to 'AutoPilotHWID.csv.' 
+    C:\'Program Files'\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1 -OutputFile 'AutoPilotHWID.csv' # Get hardware id and send output to 'AutoPilotHWID.csv.' 
 
-    $regex = (\d{12}) # Define a regex value of twelve numeric digits.
-    $output = Select-String -Path 'AutoPilotHWID.csv' -Pattern $regex -AllMatches | foreach-Object {$_.Matches } | foreach-object {$_.Value} # Get hardware id.
-    Rename-Item -Path '.\AutoPilotHWID.csv' -NewName $output'.csv' # Rename file to hardware id.
+    $input = '.\AutoPilotHWID.csv'
+    $regex = '\d{12}'
+    $output = Select-String -Path $input -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value}
+    echo $output
+
+    Rename-Item -Path '.\AutoPilotHWID.csv' -NewName $output'.csv'
 }
 
 Check_Directory
