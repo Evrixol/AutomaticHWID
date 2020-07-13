@@ -31,18 +31,19 @@ function Check_GetWindowsAutoPilotInfo
 # Set location to <HWID>
 function Check_Directory 
 {
-    $HWID_dir_exists = Test-Path $PSScriptRoot+'\..\HWID'
+    $HWID_dir = $PSScriptRoot + [regex]::escape('\..\HWID')
+    $HWID_dir_exists = Test-Path $HWID_dir | Out-Null
     if($HWID_dir_exists -eq $False) 
     {
         Write-Output "'HWID\' directory nonexistant. Creating new directory. "
-        mkdir -Path $PSScriptRoot+'\..\HWID' | Out-Null
+        mkdir -Path $HWID_dir | Out-Null
 	}
     else
     {
         write-output "'HWID\' directory exists. Ignoring. "
     }
 
-    Set-Location -Path $PSScriptRoot+'\..\HWID' | Out-Null
+    Set-Location -Path $HWID_dir | Out-Null
 }
 
 function Get-HWID
