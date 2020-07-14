@@ -1,5 +1,6 @@
 # Get-HardwareID
-----
+###### [Author](https://github.com/Vlad-Hash25)
+====
 #### Usage
 * Download `Get-HardwareID.ps1`.
 * Run `Get-HardwareID.ps1` using `Powershell.exe -ExecutionPolicy Bypass -File <patht>Get-HardwareID.ps1`
@@ -13,10 +14,9 @@
 * Add "Purpose" section in `README.md`.
 * Add "How to use" section in `README.md`.
 
-##### Known issues:
-* [Func] Check_Nuget
-  * No output. 
-  * (Possibly) doesn't do anything (when it should). 
+##### Bugs
+- [ ] Check_Nuget has no output and possibly doesn't do anything.
+- [x] Get-HardwareIdentification fails to output proper filename. 
 
 ##### Would be nice to have
 * More verbose terminal output.
