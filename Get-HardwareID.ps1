@@ -49,19 +49,20 @@ function Check_Directory
 
 # Get the hardware identification using Get-WindowsAutoPilotInfo and output into file 'AutoPilotHWID.csv'. 
 # Using 'Regex' search for a twelve digit integer and rename 'AutoPilotHWID.csv' to that twelve digit integer number. (eg: 000111222333.csv)
-function Get-HWID
+function Get-HardwareIdentification
 {
     C:\'Program Files'\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1 -OutputFile 'AutoPilotHWID.csv' # Get hardware id and send output to 'AutoPilotHWID.csv.' 
 
     $input = '.\AutoPilotHWID.csv'
     $regex = '\d{12}'
-    $output = Select-String -Path $input -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value}
+    $output = Select-String -Path $input -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value} # Get a twelve digit number using regex in input file and rename file to that twelve digit number.
     echo $output
 
     Rename-Item -Path '.\AutoPilotHWID.csv' -NewName $output'.csv'
 }
 
-Check_Directory
+
 Check_Nuget
 Check_GetWindowsAutoPilotInfo
-Get-HWID
+Check_Directory
+Get-HardwareIdentification
