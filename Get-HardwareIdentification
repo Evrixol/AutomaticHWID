@@ -1,0 +1,7 @@
+class Check {
+    [String]$name
+    [String]$version
+    [String]$path
+}
+
+function 

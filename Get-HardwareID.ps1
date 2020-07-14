@@ -5,7 +5,7 @@ function Check_Nuget
     Write-Output "Checking for NuGet".
     if(Get-PackageProvider -ListAvailable | Where-Object Name -eq "NuGet" | Out-Null)
     {
-        $foo = Get-PackageProvider -ListAvailable | Where-Object V
+        Write-output "NuGet installed. Ignoring."
     }
     elseif(Get-PackageProvider -ListAvailable | Where-Object Name -ne "NuGet" | Out-Null)
     {
@@ -54,10 +54,10 @@ function Get-HardwareIdentification
 {
     C:\'Program Files'\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1 -OutputFile 'AutoPilotHWID.csv' # Get hardware id and send output to 'AutoPilotHWID.csv.' 
 
-    $input = '.\AutoPilotHWID.csv'
+    $file = '.\AutoPilotHWID.csv'
     $regex = '\d{12}'
-    $output = Select-String -Path $input -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value} # Get a twelve digit number using regex in input file and rename file to that twelve digit number.
-    echo $output
+    $output = Select-String -Path $file -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value} # Get a twelve digit number using regex in input file and rename file to that twelve digit number.
+    Write-Output $output
 
     Rename-Item -Path '.\AutoPilotHWID.csv' -NewName $output'.csv'
 }
