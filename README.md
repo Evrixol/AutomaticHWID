@@ -1,6 +1,7 @@
 # Get-HardwareID
-###### [Author](https://github.com/Vlad-Hash25)
-====
+[Author](https://github.com/Vlad-Hash25)
+----
+
 #### Usage
 * Download `Get-HardwareID.ps1`.
 * Run `Get-HardwareID.ps1` using `Powershell.exe -ExecutionPolicy Bypass -File <patht>Get-HardwareID.ps1`
