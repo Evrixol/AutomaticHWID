@@ -5,7 +5,7 @@ function Check_Nuget
     Write-Output "Checking for NuGet".
     if(Get-PackageProvider -ListAvailable | Where-Object Name -eq "NuGet" | Out-Null)
     {
-        Write-Output "'NuGet' package provider installed. Ignoring. "
+        $foo = Get-PackageProvider -ListAvailable | Where-Object V
     }
     elseif(Get-PackageProvider -ListAvailable | Where-Object Name -ne "NuGet" | Out-Null)
     {
