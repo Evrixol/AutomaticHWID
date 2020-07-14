@@ -2,6 +2,7 @@
 # TODO: Figure out why it's not putting out output. 
 function Check_Nuget 
 {
+    Write-Output "Checking for NuGet".
     if(Get-PackageProvider -ListAvailable | Where-Object Name -eq "NuGet" | Out-Null)
     {
         Write-Output "'NuGet' package provider installed. Ignoring. "
