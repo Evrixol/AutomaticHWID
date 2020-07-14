@@ -1,11 +1,10 @@
-# Get-HardwareID
-
-### Purpose:
-
+# README
+## Get-HardwareID
 
 #### TODO:
 * Resolve bugs _listed in "__Known issues__"._
 * Add "Purpose" section in `README.md`.
+* Add "How to use" section in `README.md`.
 
 #### Would be nice to have / do: 
 * More verbose terminal output.
