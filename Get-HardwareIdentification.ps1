@@ -1,12 +1,15 @@
-Class Animal {
-    [string]$Name
-    [string]${Diet Type}
-
-    Animal ([string]$Name, [string]${Diet Type}) {
-        $this.Name = $Name
-        $this.{Diet Type} = ${Diet Type}
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    
+    for($i = 0; $i -lt 3; $i++) {
+        [Console]::Beep(1000, 100)
     }
-}
 
-$newAnimal = [animal]::new("Dog", "Carnivore"), [animal]::new("Human", "Omnivore"), [animal]::new("Rabbit", "Herbavore")
-$newAnimal
+    Write-Host "`nInsufficient permissions to run this script. Run this as an administrator.`n" -ForegroundColor Red -BackgroundColor Black
+    
+    Pause
+    Break
+}
+else {
+    Write-Host "`nScript is running with elevated permissions. Continuing...`n" -ForegroundColor Green
+    Pause
+}
