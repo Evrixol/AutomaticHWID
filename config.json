@@ -21,6 +21,6 @@
       "verbose"                       : false,
       "auto_upload"                   : null,
       
-      "_comment1_"                     : "Automatic upload part is going to be omitted for the time being."
+      "_comment1_"                    : "Automatic upload part is going to be omitted for the time being."
     }
   }
