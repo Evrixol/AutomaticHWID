@@ -1,7 +1,26 @@
 {
-    Required {
-        
+    "configuration" : {
+      
+      "directory": {
+        "name"                        : "HWID",
+        "location"                    : null
+      },
+      
+      "temp_file": {
+        "name"                        : "AutoPilotHWID",
+        "extension"                   : "csv",
+        "location"                    : "HWID"
+      },
+      
+      "min_versions": {
+        "NuGet"                       : "2.8.5.208",
+        "Get-WindowsAutoPilotInfo"    : "2.5"
+      },
+      
+      "prompt"                        : null,
+      "verbose"                       : false,
+      "auto_upload"                   : null,
+      
+      "_comment1_"                     : "Automatic upload part is going to be omitted for the time being."
     }
-
-
-}
+  }
