@@ -1,5 +1,4 @@
 # Get-HardwareID
-[Author](https://github.com/Vlad-Hash25)
 ----
 
 #### Usage
