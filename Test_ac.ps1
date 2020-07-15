@@ -1,0 +1,1 @@
+Get-PackageProvider -ListAvailable | Where-Object {$_.Name -eq "NuGet"}
