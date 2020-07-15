@@ -1,8 +1,7 @@
 {
-    "NuGet": [
-        {
-            "Minimum_Version" : "2.8.5.208"
-            
-        }
-    ]
+    Required {
+        
+    }
+
+
 }
