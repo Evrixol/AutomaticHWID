@@ -1,1 +1,1 @@
-Get-PackageProvider -ListAvailable | Where-Object {$_.Name -eq "NuGet"}
+Write-Output (Get-Content -Raw -Path $PSScriptroot'\config.json' | ConvertFrom-Json)
