@@ -10,7 +10,7 @@
        "location":"HWID"
     
  },
-    "min_versions":{
+    "min_ver":{
        "NuGet":"2.8.5.208",
        "Get-WindowsAutoPilotInfo":"2.5"
     

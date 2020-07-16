@@ -2,34 +2,47 @@
 $json = (Get-Content -Raw -Path $PSScriptroot'\config.json' | ConvertFrom-Json)
 
 # Check if NuGet is installed.
-function CheckInstall-NuGet()
+Function Confirm-NuGet()
 {
     # Display what function is doing.
     Write-Host "Checking for NuGet installation... " -ForegroundColor Yellow
     
     # Checking available package providers, checking names for 'nuget'. 
-    if ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" ) -EQ $False )
+    If ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" ) -EQ $False )
     {
         # If not installed, install. Install minimum version located in config.json.
         Write-Host "NuGet isn't installed. Installing." -ForegroundColor Yellow -BackgroundColor DarkRed
 
 
     }
-    elseif ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" ) -EQ $True )
+    # If installed, check version. 
+    ElseIf ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" ) -EQ $True )
     {
+        # Display what function is doing.
         Write-Host "NuGet is installed. Checking version..." -ForegroundColor Yellow
-        $Nuget_Has_Required_Version = ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" | Select-Object Version | Foreach-Object -Process {Select-String "^\d.*\d$" -List -InputObject $_.Version }) -GE $json.min_versions.NuGet)
+        
+        # Get the current installed version of NuGet and the required version of NuGet listed in config.json.
+        $cur = [Version]::Parse((Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" | Select-Object Version | Foreach-Object -Process {Select-String "^\d.*\d$" -List -InputObject $_.Version }))
+        $req = [Version]::Parse($json.min_ver.NuGet)
 
-        If ($Nuget_Has_Required_Version -EQ $False)
+        # Compare the current version of Nuget versus the minimum required version.
+        If (($cur -GE $req) -EQ $True) 
         {
-            Write-Host "NuGet required version met. Ending function call." -ForegroundColor Green
+            # If NuGet is installed and holds the minimum required version or newer, display such and end function call.
+            Write-Host "NuGet is installed and holds required version." -ForegroundColor Green
             Break
         }
-        elseif ($Nuget_Has_Required_Version -EQ $True)
+        ElseIF (($cur -GE $req) -EQ $False)
         {
-            Write-Host "Nuget required version not met. Updating to required version." -ForegroundColor Red -BackgroundColor Black -
+            # If NuGet is installed but doesn't hold the minimum required version, display so and update to the minimum required version. 
+            Write-Host "NuGet version not up to date. Updating..." -ForegroundColor Red
+
+            Update-Module nuget -Force
         }
+
+
+        
     }
 }
 
-CheckInstall-NuGet
+Confirm-Nuget
