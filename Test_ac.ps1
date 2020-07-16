@@ -1,1 +1,0 @@
-Write-Output (Get-Content -Raw -Path $PSScriptroot'\config.json' | ConvertFrom-Json)

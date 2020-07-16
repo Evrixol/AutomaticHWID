@@ -1,1 +1,0 @@
-Get-PackageProvider -ListAvailable | Where-Object Name -CEQ "nuget" | Select-Object Version | Foreach-Object -Process {Select-String -Pattern '2.8.5.208' -List -InputObject $_.Version }
