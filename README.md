@@ -20,3 +20,15 @@ AutomaticHWID
 #### Get-HardwareIdentification
 * Get hardware ID and output to file listed in config.json.
   * Rename file to twelve digit hardware ID located in file.
+
+
+Bugs
+======
+- [x] Confirm-NuGet has no output and possibly doesn't do anything.
+- [x] Get-HardwareID fails to output proper filename.
+
+
+To Be Added
+======
+- [x] More verbose terminal output.
+- [x] Configuration file.
