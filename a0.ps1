@@ -88,6 +88,11 @@ Function Confirm-Directory
     }
 }
 
+# Get the Hardware ID of the system that this script is running on. Place i n
+Function Get-HardwareID {
+
+}
+
 Confirm-NuGet
 Confirm-Get_WindowsAutoPilotInfo
 Confirm-Directory

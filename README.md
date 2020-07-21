@@ -1,18 +1,19 @@
-Get-HardwareID
+AutomaticHWID
 ======
 
-#### Ignore the name of this branch. It's not made by a group of people. Just little old me.
+#### Confirm-NuGet
+* Ensure that package provider NuGet is installed to minimum version listed in config.json.
+  * If NuGet isn't installed, then install with required version listed in config.json.
+  * If NuGet is installed, check if version number is greater than or equal to required version. 
+  * If previous case is false, update to minimum required version listed in config.json.
 
-Description
-------
-This script will gather the internal windows product identity and place it in a file with the name of the twelve digit serial number located inside of the file. 
+#### Confirm-Get_WindowsAutoPilotInfo.ps1
+* Check that script Get-WindowsAutoPilotHWID.ps1 is installed and downladed. 
+  * If script isn't installed, then install with minimum required version listed in config.json.
+  * If script is installed, then don't do anything.
 
-How it do
-------
-Using [NuGet](https://www.nuget.org/) download [Get-WindowsAutoPilotInfo](https://www.powershellgallery.com/packages/Get-WindowsAutoPilotInfo/2.5) from [PSGallery](https://www.powershellgallery.com/).
+#### Confirm-Directory
+* Confirm that the directory listed in config.json exists in the location stated. 
+  * If directory exists in proper location, don't do anything.
+  * If directory doesn't exist in proper location, create a new directory in that location with name listed in config.json.
 
-Using [Get-WindowsAutoPilotInfo](https://www.powershellgallery.com/packages/Get-WindowsAutoPilotInfo/2.5) gather the internal PKID and output to a file in a seperate directory. 
-
-Gather the internal twelve digit numerical code located inside of the file and rename the file to said code.
-
-Then futz off to next week. 
