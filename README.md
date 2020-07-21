@@ -1,30 +1,34 @@
-# Get-HardwareID
-----
+AutomaticHWID
+======
 
-#### Usage
-* Download `Get-HardwareID.ps1`.
-* Run `Get-HardwareID.ps1` using `Powershell.exe -ExecutionPolicy Bypass -File <patht>Get-HardwareID.ps1`
-  * It is highly recommended to run this script in a double nested folder as it will create it's own folder for the hardware id. 
-  * This script will install NuGet and download a script (`Get-WindowsAutoPilotInfo.ps1`) from `PSGallery`.
+#### Confirm-NuGet
+* Ensure that package provider NuGet is installed to minimum version listed in config.json.
+  * If NuGet isn't installed, then install with required version listed in config.json.
+  * If NuGet is installed, check if version number is greater than or equal to required version. 
+  * If previous case is false, update to minimum required version listed in config.json.
 
-----
+#### Confirm-Get_WindowsAutoPilotInfo.ps1
+* Check that script Get-WindowsAutoPilotHWID.ps1 is installed and downladed. 
+  * If script isn't installed, then install with minimum required version listed in config.json.
+  * If script is installed, then don't do anything.
 
-##### TODO
-* Resolve bugs listed in "_Known issues_`".
-* Add "Purpose" section in `README.md`.
-* Add "How to use" section in `README.md`.
+#### Confirm-Directory
+* Confirm that the directory listed in config.json exists in the location stated. 
+  * If directory exists in proper location, don't do anything.
+  * If directory doesn't exist in proper location, create a new directory in that location with name listed in config.json.
 
-##### Bugs
-- [ ] Check_Nuget has no output and possibly doesn't do anything.
-- [x] Get-HardwareIdentification fails to output proper filename. 
+#### Get-HardwareIdentification
+* Get hardware ID and output to file listed in config.json.
+  * Rename file to twelve digit hardware ID located in file.
 
-##### Would be nice to have
-* More verbose terminal output.
-* Configuration file.
-  * Output file temporary placeholder name.
-  * Output directory location. 
-  * Output directory name.
-  * Output file extension. (Eg: .csv .txt .md .shoveit)
-  * Required external scripts minimum version(s). 
-  * Verbosity (True/False) option.
-  * Option to automatically upload hardware ID to asset data server.
+
+Bugs
+======
+- [x] Confirm-NuGet has no output and possibly doesn't do anything.
+- [x] Get-HardwareID fails to output proper filename.
+
+
+To Be Added
+======
+- [x] More verbose terminal output.
+- [x] Configuration file.
