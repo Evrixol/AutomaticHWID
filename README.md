@@ -17,3 +17,6 @@ AutomaticHWID
   * If directory exists in proper location, don't do anything.
   * If directory doesn't exist in proper location, create a new directory in that location with name listed in config.json.
 
+#### Get-HardwareIdentification
+* Get hardware ID and output to file listed in config.json.
+  * Rename file to twelve digit hardware ID located in file.
