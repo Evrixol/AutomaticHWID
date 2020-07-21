@@ -1,6 +1,14 @@
 AutomaticHWID
 ======
 
+Usage
+======
+You need `config.json` and `AutomaticHWID.ps1` to get the hardware identification. `Start.bat` is recommended if you are uncomfortable. `Start.bat` assumes that it is in the same folder with `config.json` and `AutomaticHWID.ps1` when run.
+To run `AutomaticHWID.ps1` it needs to be run as administrator and bypass execution policy. You can do this by running `Powershell.exe -ExecutionPolicy Bypass -File <pathto: AutomaticHWID.ps1>` as administrator. Or you can run `Start.bat` as an administrator.
+
+Functions
+======
+
 #### Confirm-NuGet
 * Ensure that package provider NuGet is installed to minimum version listed in config.json.
   * If NuGet isn't installed, then install with required version listed in config.json.
@@ -20,7 +28,6 @@ AutomaticHWID
 #### Get-HardwareIdentification
 * Get hardware ID and output to file listed in config.json.
   * Rename file to twelve digit hardware ID located in file.
-
 
 Bugs
 ======
