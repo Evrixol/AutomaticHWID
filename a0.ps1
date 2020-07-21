@@ -44,7 +44,7 @@ Function Confirm-NuGet
 }
 
 # Check if "Get-WindowsAutoPilotInfo.ps1" is present in the system. 
-Function Confirm-Get_WindowsAutopilotInfo
+Function Confirm-Get_WindowsAutoPilotInfo
 {
     # Declare what function is and what it is doing.
     Write-Host "`nFunction ``Confirm-Get_WindowsAutoPilotInfo`` called. Output:`n" -ForegroundColor Red
@@ -76,23 +76,61 @@ Function Confirm-Directory
 
     # Test whether or not directory is present.
     Write-Host "Testing whether or not ``$($json.directory.location)$($json.directory.name)`` Exists..." -ForegroundColor Yellow
-    $dir =  "$($json.directory.location)$($json.directory.name)" # The directory whole.
+    $dir = $PSScriptRoot+"$($json.directory.location)$($json.directory.name)" # The directory whole.
     $dir_exists = Test-Path $dir # Directory exists bool.
-
-
-    Write-Host ($json.directory.location)($json.directory.name)
 
     If ($dir_exists -EQ $True)
     {
-        Write-Host "Directory exists. "
+        # If directory exists, say such thing and set location to directory.
+        Write-Host "Directory exists." -ForegroundColor Green
+        Write-Host "`nSetting location to proper directory..." -ForegroundColor Yellow
+        Set-Location $dir
+        Write-Host "`nLocation Set!`nEnding function call." -ForegroundColor Green
     }
+    ElseIf ($dir_exists -eq $False)
+    {
+        # If directory doesn't exist, say such and create location. Then set location to that directory.
+        Write-Host "`nDirectory does not exist!" -ForegroundColor Red
+        
+        Write-Host "`nCreating new directory..." -ForegroundColor Yellow
+        
+        mkdir $dir | Out-Null
+        
+        Write-Host "Directory created!" -ForegroundColor Green
+        Write-Host "`nSetting location to directory..." -ForegroundColor Yellow
+        
+        Set-Location $dir
+        Write-Host "Location set!`nEnding function call.`n" -ForegroundColor Green
+    }
+
+    
 }
 
 # Get the Hardware ID of the system that this script is running on. Place i n
-Function Get-HardwareID {
+Function Get-HardwareID 
+{
+    # God awful output file path spaghetti nightmare. GAOFPSN for short. The acronym matches its meaning.
+    $output = $PSScriptRoot+$($json.directory.location)+$($json.directory.name)+$($json.temp_file.name)
 
+    # Write what function is doing.
+    Write-Host "`nFunction ``Get-HardwareID`` called. Output:`n" -ForegroundColor Red
+
+    # Get hardware ID and output to file listed in config.
+    Write-Host "Getting hardware identification...`nOutputting to file "$output -ForegroundColor yellow
+    C:\'Program Files'\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1 -OutputFile $output
+
+    # Renaming file to twelve digit serial number inside of file.
+    Write-Host "Renaming file to twelve digit serial number inside file..." -ForegroundColor Yellow
+    $regex = '\d{12}'
+    $foo = Select-String -Path $output -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value} # Get a twelve digit number using regex in input file and rename file to that twelve digit number.
+    Rename-Item -Path $output -NewName $($foo+$json.temp_file.extension)
+
+    Write-Host "Done! Ending function call!" -ForegroundColor green
 }
 
+# Calling the various functions and ending script.  
 Confirm-NuGet
-Confirm-Get_WindowsAutoPilotInfo
+Confirm-Get_WindowsAutopilotInfo
 Confirm-Directory
+Get-HardwareID
+

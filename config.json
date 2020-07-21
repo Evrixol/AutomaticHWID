@@ -1,11 +1,18 @@
 {
+	"_comment-a0_":"Unless you know exactly what the hell you are doing, do not modify this file.",
+
 	"directory": {
-		"name":"HWID",
-		"location":".\\"
+		"name":"HWID\\",
+		"location":"\\",
+
+		"_comment-a1_":"If you want the directory to be located in the same location as script, leave \"location\" with a backslash. Name should be suffixed with a backslash",
+		"_comment-a2_":"Backslashes are seen as a control character and need to be prefixed by a backslash in order to be usable. Check file with a json verifier."
 	},
 	"temp_file": {
-		"name": "AutoPilotHWID",
-		"extension": "csv"
+		"name": "AutoPilotHWID.csv",
+		"extension":".csv",
+
+		"_comment-a3_":"The name needs to include the extension, the extension is needed for the final file name."
 	},
 	"min_ver": {
 		"NuGet": "2.8.5.208",
