@@ -1,30 +1,41 @@
-# Get-HardwareID
-----
+AutomaticHWID
+======
 
-#### Usage
-* Download `Get-HardwareID.ps1`.
-* Run `Get-HardwareID.ps1` using `Powershell.exe -ExecutionPolicy Bypass -File <patht>Get-HardwareID.ps1`
-  * It is highly recommended to run this script in a double nested folder as it will create it's own folder for the hardware id. 
-  * This script will install NuGet and download a script (`Get-WindowsAutoPilotInfo.ps1`) from `PSGallery`.
+Usage
+======
+You need `config.json` and `AutomaticHWID.ps1` to get the hardware identification. `Start.bat` is recommended if you are uncomfortable. `Start.bat` assumes that it is in the same folder with `config.json` and `AutomaticHWID.ps1` when run.
+To run `AutomaticHWID.ps1` it needs to be run as administrator and bypass execution policy. You can do this by running `Powershell.exe -ExecutionPolicy Bypass -File <pathto: AutomaticHWID.ps1>` as administrator. Or you can run `Start.bat` as an administrator.
 
-----
+Functions
+======
 
-##### TODO
-* Resolve bugs listed in "_Known issues_`".
-* Add "Purpose" section in `README.md`.
-* Add "How to use" section in `README.md`.
+#### Confirm-NuGet
+* Ensure that package provider NuGet is installed to minimum version listed in config.json.
+  * If NuGet isn't installed, then install with required version listed in config.json.
+  * If NuGet is installed, check if version number is greater than or equal to required version. 
+  * If previous case is false, update to minimum required version listed in config.json.
 
-##### Bugs
-- [ ] Check_Nuget has no output and possibly doesn't do anything.
-- [x] Get-HardwareIdentification fails to output proper filename. 
+#### Confirm-Get_WindowsAutoPilotInfo.ps1
+* Check that script Get-WindowsAutoPilotHWID.ps1 is installed and downladed. 
+  * If script isn't installed, then install with minimum required version listed in config.json.
+  * If script is installed, then don't do anything.
 
-##### Would be nice to have
-* More verbose terminal output.
-* Configuration file.
-  * Output file temporary placeholder name.
-  * Output directory location. 
-  * Output directory name.
-  * Output file extension. (Eg: .csv .txt .md .shoveit)
-  * Required external scripts minimum version(s). 
-  * Verbosity (True/False) option.
-  * Option to automatically upload hardware ID to asset data server.
+#### Confirm-Directory
+* Confirm that the directory listed in config.json exists in the location stated. 
+  * If directory exists in proper location, don't do anything.
+  * If directory doesn't exist in proper location, create a new directory in that location with name listed in config.json.
+
+#### Get-HardwareIdentification
+* Get hardware ID and output to file listed in config.json.
+  * Rename file to twelve digit hardware ID located in file.
+
+Bugs
+======
+- [x] Confirm-NuGet has no output and possibly doesn't do anything.
+- [x] Get-HardwareID fails to output proper filename.
+
+
+To Be Added
+======
+- [x] More verbose terminal output.
+- [x] Configuration file.
