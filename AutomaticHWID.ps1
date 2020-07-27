@@ -9,7 +9,7 @@ Function Confirm-NuGet
     Write-Host "Checking for ``NuGet`` installation... " -ForegroundColor Yellow
     
     # Checking available package providers, checking names for 'nuget'. 
-    If (( Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" ) -EQ $False )
+    If ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" ) -EQ $False )
     {
         # If not installed, install. Install minimum version located in config.json.
         Write-Host "``NuGet`` isn't installed. Installing..." -ForegroundColor Yellow -BackgroundColor DarkRed
