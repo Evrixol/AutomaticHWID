@@ -13,7 +13,9 @@ Function Confirm-NuGet
     {
         # If not installed, install. Install minimum version located in config.json.
         Write-Host "``NuGet`` isn't installed. Installing." -ForegroundColor Yellow -BackgroundColor DarkRed
-
+        
+        Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet
+        Write-Host "``NuGet`` is now installed. Ending function call..." -ForegroundColor Green
 
     }
     # If installed, check version. 
