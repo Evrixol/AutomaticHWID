@@ -9,12 +9,12 @@ Function Confirm-NuGet
     Write-Host "Checking for ``NuGet`` installation... " -ForegroundColor Yellow
     
     # Checking available package providers, checking names for 'nuget'. 
-    If ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" ) -EQ $False )
+    If (( Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" ) -EQ $False )
     {
         # If not installed, install. Install minimum version located in config.json.
-        Write-Host "``NuGet`` isn't installed. Installing." -ForegroundColor Yellow -BackgroundColor DarkRed
-        
-        Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet -Force
+        Write-Host "``NuGet`` isn't installed. Installing..." -ForegroundColor Yellow -BackgroundColor DarkRed
+
+        Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet -Force | Out-Null
         Write-Host "``NuGet`` is now installed. Ending function call..." -ForegroundColor Green
 
     }
@@ -39,7 +39,7 @@ Function Confirm-NuGet
             # If NuGet is installed but doesn't hold the minimum required version, display so and update to the minimum required version. 
             Write-Host "``NuGet`` version not up to date. Updating..." -ForegroundColor Red
 
-            Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet -Force
+            Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet -Force | Out-Null
             Write-Host "``NuGet`` is now installed.`nEnding function call for ``Confirm-NuGet``." -ForegroundColor Green
         }        
     }
@@ -60,7 +60,7 @@ Function Confirm-Get_WindowsAutoPilotInfo
     If ($req_present -EQ $False)
     {
         Write-Host "``Get-WindowsAutoPilotInfo.ps1`` not installed. Installing..." -ForegroundColor Red
-        Install-Script -Name "Get-WindowsAutoPilotInfo.ps1" -Repository "PSGallery" -Force
+        Install-Script -Name "Get-WindowsAutoPilotInfo" -Repository "PSGallery" -Force -MinimumVersion $json.min_ver.Get_WindowsAutoPilotInfo
         Write-Host "``Get-WindowsAutoPilotInfo.ps1`` is now installed. `nEnding function call for ``Confirm-Get_WindowsAutoPilotInfo``." -ForegroundColor Green
     }
     ElseIF ($req_present -EQ $True)
