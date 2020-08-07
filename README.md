@@ -16,6 +16,11 @@ Functions
   * If NuGet is installed, check if version number is greater than or equal to required version. 
   * If previous case is false, update to minimum required version listed in config.json.
 
+#### Confirm-Elevation
+* Checks whether or not script is running with administraitive permissions.
+  * If not running with elevation, break script.
+  * Else, end function call.
+
 #### Confirm-Get_WindowsAutoPilotInfo.ps1
 * Check that script Get-WindowsAutoPilotHWID.ps1 is installed and downladed. 
   * If script isn't installed, then install with minimum required version listed in config.json.
