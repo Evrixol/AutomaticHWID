@@ -130,8 +130,15 @@ Function Get-HardwareID
     Write-Host "Done! Ending function call!" -ForegroundColor green
 }
 
+
+
+
+<# Not going to use these for the moment. 
+
 # Calling the various functions and ending script.  
 Confirm-NuGet
 Confirm-Get_WindowsAutopilotInfo
 Confirm-Directory
 Get-HardwareID
+
+#>
