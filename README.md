@@ -46,7 +46,7 @@ TODO
     - [ ] Extension type.
     - [ ] Naming convention.
     - [ ] Temp holding name.
-- [ ] Elevations / administrative permissions checking.
+- [x] Elevations / administrative permissions checking.
 - [ ] Internet connection checking. (Glorified pinging of Cloudfare or something idk.)
 - [x] More verbose terminal output.
 - [x] Configuration file.
@@ -59,7 +59,7 @@ TODO
 
 Nice To Have
 =====
+- [ ] Self request process elevation. 
 - [ ] Further increased output verbosity for debugging and output logging reasons.
 - [ ] Progress bar or some other 'processing' / 'loading' animation. 
 - [ ] Script automatically updates itself and its config file. (Not happening ANY TIME FUCKING SOON.)
-- [ ] Migrate script to a .exe file using C++ or another native language. (Also not happening ANY TIME FUCKING SOON. EVER.)

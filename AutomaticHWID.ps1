@@ -5,14 +5,14 @@ $json = (Get-Content -Raw -Path $PSScriptroot'\config.json' | ConvertFrom-Json)
 Function Confirm-NuGet
 {
     # Display what function is doing.
-    Write-Host "`nFunction ``Confirm-NuGet`` called. Output:`n" -ForegroundColor Red
-    Write-Host "Checking for ``NuGet`` installation... " -ForegroundColor Yellow
+    Write-Host "`nFunction ``Confirm-NuGet`` called. Output:`n" -ForegroundColor White
+    Write-Host "Checking for ``NuGet`` installation... " -ForegroundColor White
     
     # Checking available package providers, checking names for 'nuget'. 
     If ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" ) -EQ $False )
     {
         # If not installed, install. Install minimum version located in config.json.
-        Write-Host "``NuGet`` isn't installed. Installing..." -ForegroundColor Yellow -BackgroundColor DarkRed
+        Write-Host "``NuGet`` isn't installed. Installing..." -ForegroundColor Yellow
 
         Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet -Force | Out-Null
         Write-Host "``NuGet`` is now installed. Ending function call..." -ForegroundColor Green
@@ -21,7 +21,7 @@ Function Confirm-NuGet
     # If installed, check version. 
     ElseIf ( !! ( Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" ) -EQ $True )
     {
-        Write-Host "``NuGet`` is installed. Checking version..." -ForegroundColor Yellow
+        Write-Host "``NuGet`` is installed. Checking version..." -ForegroundColor White
         
         # Get the current installed version of NuGet and the required version of NuGet listed in config.json.
         $cur = [Version]::Parse((Get-PackageProvider -ListAvailable | Where-Object Name -EQ "nuget" | Select-Object Version | Foreach-Object -Process {Select-String "^\d.*\d$" -List -InputObject $_.Version }))
@@ -37,7 +37,7 @@ Function Confirm-NuGet
         ElseIF (($cur -GE $req) -EQ $False)
         {
             # If NuGet is installed but doesn't hold the minimum required version, display so and update to the minimum required version. 
-            Write-Host "``NuGet`` version not up to date. Updating..." -ForegroundColor Red
+            Write-Host "``NuGet`` version not up to date. Updating..." -ForegroundColor Yellow
 
             Install-PackageProvider -Name "nuget" -RequiredVersion $json.min_ver.NuGet -Force | Out-Null
             Write-Host "``NuGet`` is now installed.`nEnding function call for ``Confirm-NuGet``." -ForegroundColor Green
@@ -49,8 +49,8 @@ Function Confirm-NuGet
 Function Confirm-Get_WindowsAutoPilotInfo
 {
     # Declare what function is and what it is doing.
-    Write-Host "`nFunction ``Confirm-Get_WindowsAutoPilotInfo`` called. Output:`n" -ForegroundColor Red
-    Write-Host "Checking for ``Get-WindowsAutoPilotInfo.ps1``... " -ForegroundColor Yellow
+    Write-Host "`nFunction ``Confirm-Get_WindowsAutoPilotInfo`` called. Output:`n" -ForegroundColor White
+    Write-Host "Checking for ``Get-WindowsAutoPilotInfo.ps1``... " -ForegroundColor White
 
     # Path to required script, test if it is present.
     $Scrpt = "C:\Program Files\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1"
@@ -59,7 +59,7 @@ Function Confirm-Get_WindowsAutoPilotInfo
     # Test if script is present. If it isn't, write so and install.
     If ($req_present -EQ $False)
     {
-        Write-Host "``Get-WindowsAutoPilotInfo.ps1`` not installed. Installing..." -ForegroundColor Red
+        Write-Host "``Get-WindowsAutoPilotInfo.ps1`` not installed. Installing..." -ForegroundColor Yellow
         Install-Script -Name "Get-WindowsAutoPilotInfo" -Repository "PSGallery" -Force -MinimumVersion $json.min_ver.Get_WindowsAutoPilotInfo
         Write-Host "``Get-WindowsAutoPilotInfo.ps1`` is now installed. `nEnding function call for ``Confirm-Get_WindowsAutoPilotInfo``." -ForegroundColor Green
     }
@@ -74,32 +74,32 @@ Function Confirm-Get_WindowsAutoPilotInfo
 Function Confirm-Directory
 {
     # Declare what function is and what it is doing.
-    Write-Host "`nFunction ``Confirm-Directory`` called. Output:`n" -ForegroundColor Red
+    Write-Host "`nFunction ``Confirm-Directory`` called. Output:`n" -ForegroundColor White
 
     # Test whether or not directory is present.
-    Write-Host "Testing whether or not ``$($json.directory.location)$($json.directory.name)`` Exists..." -ForegroundColor Yellow
+    Write-Host "Testing whether or not ``$($json.directory.location)$($json.directory.name)`` Exists..." -ForegroundColor White
     $dir = $PSScriptRoot+"$($json.directory.location)$($json.directory.name)" # The directory whole.
     $dir_exists = Test-Path $dir # Directory exists bool.
 
     If ($dir_exists -EQ $True)
     {
         # If directory exists, say such thing and set location to directory.
-        Write-Host "Directory exists." -ForegroundColor Green
-        Write-Host "`nSetting location to proper directory..." -ForegroundColor Yellow
+        Write-Host "Directory exists." -ForegroundColor White
+        Write-Host "`nSetting location to proper directory..." -ForegroundColor White
         Set-Location $dir
         Write-Host "`nLocation Set!`nEnding function call." -ForegroundColor Green
     }
     ElseIf ($dir_exists -eq $False)
     {
         # If directory doesn't exist, say such and create location. Then set location to that directory.
-        Write-Host "`nDirectory does not exist!" -ForegroundColor Red
+        Write-Host "`nDirectory does not exist!" -ForegroundColor Yellow
         
-        Write-Host "`nCreating new directory..." -ForegroundColor Yellow
+        Write-Host "`nCreating new directory..." -ForegroundColor White
         
         mkdir $dir | Out-Null
         
-        Write-Host "Directory created!" -ForegroundColor Green
-        Write-Host "`nSetting location to directory..." -ForegroundColor Yellow
+        Write-Host "Directory created!" -ForegroundColor White
+        Write-Host "`nSetting location to directory..." -ForegroundColor White
         
         Set-Location $dir
         Write-Host "Location set!`nEnding function call.`n" -ForegroundColor Green
@@ -115,30 +115,49 @@ Function Get-HardwareID
     $output = $PSScriptRoot+$($json.directory.location)+$($json.directory.name)+$($json.temp_file.name)
 
     # Write what function is doing.
-    Write-Host "`nFunction ``Get-HardwareID`` called. Output:`n" -ForegroundColor Red
+    Write-Host "`nFunction ``Get-HardwareID`` called. Output:`n" -ForegroundColor White
 
     # Get hardware ID and output to file listed in config.
-    Write-Host "Getting hardware identification...`nOutputting to file "$output -ForegroundColor yellow
+    Write-Host "Getting hardware identification...`nOutputting to file "$output -ForegroundColor White
     C:\'Program Files'\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1 -OutputFile $output
 
     # Renaming file to twelve digit serial number inside of file.
-    Write-Host "Renaming file to twelve digit serial number inside file..." -ForegroundColor Yellow
+    Write-Host "Renaming file to twelve digit serial number inside file..." -ForegroundColor White
     $regex = '\d{12}'
     $foo = Select-String -Path $output -Pattern $regex -AllMatches | ForEach-Object {$_.Matches} | ForEach-Object {$_.Value} # Get a twelve digit number using regex in input file and rename file to that twelve digit number.
     Rename-Item -Path $output -NewName $($foo+$json.temp_file.extension)
 
-    Write-Host "Done! Ending function call!" -ForegroundColor green
+    Write-Host "Done! Ending function call!" -ForegroundColor Green
 }
 
+Function Confirm-Elevation
+{
+    # Write what function is doing.
+    Write-Host "`nFunction ``Confirm-Elevation`` called. Output:`n" -ForegroundColor White
 
+    # Check for administraitive priviledge.
+    Write-Host "Checking if script is running with elevated permissions..." -ForegroundColor White
 
+    # If yes, end function call and say script is running with administrative rights. If not, full-stop script and output problem.
+    If ( ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator") -EQ $True )
+    {
+        Write-Host "Script is running with administrative permissions! Ending funciton call..." -ForegroundColor Green
+    }
+    ElseIf ( ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator") -EQ $False )
+    {
+        Write-Host "Script is not running with administrative rights! Stopping script!" -ForegroundColor Red -BackgroundColor Black
+        Break
+    }
+}
 
-<# Not going to use these for the moment. 
+Function Confirm-Internet
+{
+    
+}
 
 # Calling the various functions and ending script.  
+Confirm-Elevation
 Confirm-NuGet
 Confirm-Get_WindowsAutopilotInfo
 Confirm-Directory
 Get-HardwareID
-
-#>
