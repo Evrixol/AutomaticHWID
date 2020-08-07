@@ -36,15 +36,9 @@ Bugs
 - [x] Get-HardwareID fails to output proper filename.
 
 
-To Be Added
+TODO
 ======
-- [x] More verbose terminal output.
-- [x] Configuration file.
-  - [x] Version requirements.
-  - [x] HWID directory location.
-  - [x] HWID directory name.
-  - [x] HWID output file temp-name.
-  - [x] HWID output file file type. 
+- [ ] Cleanup terminal output & make it just look nicer.
 - [ ] Output logging.
   - [ ] Output logging config.
     - [ ] Option to actually have output.
@@ -52,12 +46,12 @@ To Be Added
     - [ ] Extension type.
     - [ ] Naming convention.
     - [ ] Temp holding name.
-- [ ] Elevations / administrative permissions checking.
+- [x] Elevations / administrative permissions checking.
 - [ ] Internet connection checking. (Glorified pinging of Cloudfare or something idk.)
-
-
-Nice To Have
-=====
-- [ ] Script automatically updates itself and its config file. (Not happening ANY TIME FUCKING SOON.)
-- [ ] Migrate script to a .exe file using C++ or another native language. (Also not happening ANY TIME FUCKING SOON. EVER.)
-- [ ] Continually increase verbosity for debugging and output logging reasons.
+- [x] More verbose terminal output.
+- [x] Configuration file.
+  - [x] Version requirements.
+  - [x] HWID directory location.
+  - [x] HWID directory name.
+  - [x] HWID output file temp-name.
+  - [x] HWID output file file type. 
