@@ -150,11 +150,6 @@ Function Confirm-Elevation
     }
 }
 
-Function Confirm-Internet
-{
-    
-}
-
 # Calling the various functions and ending script.  
 Confirm-Elevation
 Confirm-NuGet
