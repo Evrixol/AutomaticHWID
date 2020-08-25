@@ -1,19 +1,38 @@
-AutomaticHWID
-======
+# AutomaticHWID
 
-Usage
-======
-### Required File(s)
+## Usage
+
+#### Required File(s)
+
   * config.json
   * AutomaticHWID.ps1
 
-### Optional File(s)
+#### Optional File(s)
+
   * start.bat
 
 ### Instructions
-**WARNING**
-You absoultely must have `config.json` and `AutomaticHWID.ps1` in order to run this script. They must also be in the same folder in order to function.
+
 ----
+
+#### **WARNING**
+
+* You absolutely must have the files `config.json` and `AutomaticHWID.ps1` in order to run this script. They must also be in the same folder in order to function.
+* The file `start.bat` is not required to run the script, but is completely optional if you do not wish to use commands. Note that this file must also be in the same folder as `config.json` and `AutomaticHWID.ps1`.
+* This script must be run as an Administrator to function properly, if it is not run as an Administrator, it will not work.
+* Depending, this script may not output a proper hardware serial number, if this occurs then please note that the system this was run on does not have an internal hardware ID and cannot be identified. 
+* Do not run this script multiple times on the same machine, it can cause issues. 
+
+#### **Usage Instructions**
+
+*Please ensure that you have read and acknowledged all warnings and have all required files in the proper places before proceeding further.*
+
+##### Using `start.bat` (Recommended)
+###### Command Line
+* Change directory to script location. [eg: `cd <path to file>`]
+* 
+
+
 
 Functions
 ======
@@ -30,7 +49,7 @@ Functions
   * Else, end function call.
 
 #### Confirm-Get_WindowsAutoPilotInfo.ps1
-* Check that script Get-WindowsAutoPilotHWID.ps1 is installed and downladed. 
+* Check that script Get-WindowsAutoPilotHWID.ps1 is installed and downloaded. 
   * If script isn't installed, then install with minimum required version listed in config.json.
   * If script is installed, then don't do anything.
 
