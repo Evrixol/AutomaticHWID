@@ -3,15 +3,17 @@ AutomaticHWID
 
 Usage
 ======
-**REQUIRED FILE(s)**
+### Required File(s)
   * config.json
   * AutomaticHWID.ps1
 
-**OPTIONAL FILE(s)**
+### Optional File(s)
   * start.bat
 
-**Instructions**
-
+### Instructions
+**WARNING**
+You absoultely must have `config.json` and `AutomaticHWID.ps1` in order to run this script. They must also be in the same folder in order to function.
+----
 
 Functions
 ======
