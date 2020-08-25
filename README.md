@@ -3,8 +3,14 @@ AutomaticHWID
 
 Usage
 ======
-You need `config.json` and `AutomaticHWID.ps1` to get the hardware identification. `Start.bat` is recommended if you are uncomfortable with commands. Please note: All of these scripts assume and absolutely require them to be in the same folder when they are run.
-  To run `AutomaticHWID.ps1` it needs to be run as administrator and bypass execution policy. You can do this by running `Powershell.exe -ExecutionPolicy Bypass -File <pathto: AutomaticHWID.ps1>` as administrator. Or you can run `Start.bat` as an administrator.
+**REQUIRED FILE(s)**
+  * config.json
+  * AutomaticHWID.ps1
+
+**OPTIONAL FILE(s)**
+  * start.bat
+
+**Instructions**
 
 
 Functions
