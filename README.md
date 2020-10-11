@@ -79,6 +79,7 @@ Known Bugs
 
 TODO
 ======
+- [ ] Flush out README.md instructions to include manual `AutomaticHWID.ps1` running instructions. 
 - [ ] Convert config file to YAML type. (JSON is nice, but comments are nicer.)
 - [ ] Low-level function breakdown.
 - [ ] Cleanup terminal output & make it just look nicer.
