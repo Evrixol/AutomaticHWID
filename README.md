@@ -11,11 +11,9 @@
 
   * start.bat
 
-### Instructions
+-----
 
-----
-
-#### **WARNING**
+### **WARNING**
 
 * You absolutely must have the files `config.json` and `AutomaticHWID.ps1` in order to run this script. They must also be in the same folder in order to function.
 * The file `start.bat` is not required to run the script, but is completely optional if you do not wish to use commands. Note that this file must also be in the same folder as `config.json` and `AutomaticHWID.ps1`.
@@ -23,16 +21,25 @@
 * Depending, this script may not output a proper hardware serial number, if this occurs then please note that the system this was run on does not have an internal hardware ID and cannot be identified. 
 * Do not run this script multiple times on the same machine, it can cause issues. 
 
-#### **Usage Instructions**
+-----
+### **Usage Instructions**
 
 *Please ensure that you have read and acknowledged all warnings and have all required files in the proper places before proceeding further.*
 
-##### Using `start.bat` (Recommended)
-###### Command Line
-* Change directory to script location. [eg: `cd <path to file>`]
-* 
+#### Using `start.bat` (Recommended)
+##### Command Prompt(Non-administrator CMD.)
+* Open command prompt.
+* Use `RunAs` command to run `start.bat`. [eg: `runas /user:administrator <path-to>\start.bat`]
 
+##### Command Prompt (Administrative CMD instance.)
+* Open command prompt.
+* Run start.bat. [eg: `<path-to>\start.bat>`]
 
+##### File Explorer
+* Move to script containing directory.
+* Hover mouse over `start.bat`.
+* Right click `start.bat`.
+* Select 'Run as Administrator'.
 
 Functions
 ======
@@ -62,14 +69,18 @@ Functions
 * Get hardware ID and output to file listed in config.json.
   * Rename file to twelve digit hardware ID located in file.
 
-Bugs
+Known Bugs
 ======
 - [x] Confirm-NuGet has no output and possibly doesn't do anything.
 - [x] Get-HardwareID fails to output proper filename.
+- [ ] Repeated execution on the same system will result in exceptions and blank filenames. 
+- [ ] When run with no internet connection when attempted file download, exceptions thrown.
 
 
 TODO
 ======
+- [ ] Convert config file to YAML type. (JSON is nice, but comments are nicer.)
+- [ ] Low-level function breakdown.
 - [ ] Cleanup terminal output & make it just look nicer.
 - [ ] Output logging.
   - [ ] Output logging config.
@@ -78,12 +89,23 @@ TODO
     - [ ] Extension type.
     - [ ] Naming convention.
     - [ ] Temp holding name.
-- [x] Elevations / administrative permissions checking.
 - [ ] Internet connection checking. (Glorified pinging of Cloudfare or something idk.)
-- [x] More verbose terminal output.
+- [ ] Config and Script verison & updating processes.
+  - [ ] Add hard encoded version number for `AutomaticHWID.ps1`.
+  - [ ] Add hard encoded version number for `config.json`.
+  - [ ] Add local version checking system for `AutomaticHWID.ps1` and `config.json`.
+  - [ ] Add remote version checking system for `AutomaticHWID.ps1` and `config.json`.
+  - [ ] Add script and config updating procedure.
+- [ ] Add function bypass via config file **or** command line arguments.
+- [ ] Move main script extension to non-blocked default 'script' type.
+- [ ] Add certificate and creator verification process to script. 
+- [x] Elevations / administrative permissions checking.
+- [x] Increased terminal output verbosity. 
 - [x] Configuration file.
-  - [x] Version requirements.
-  - [x] HWID directory location.
-  - [x] HWID directory name.
-  - [x] HWID output file temp-name.
-  - [x] HWID output file file type. 
+  - [x] Required script version requirements.
+  - [x] HWID Configuration.
+    - [x] HWID directory location.
+	- [x] HWID directory name.
+	- [x] HWID output file placeholder name.
+	- [x] HWID output file type extension.
+- [ ] ~~Shorten TODO list length.~~
