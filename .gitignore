@@ -1,0 +1,13 @@
+.vscode/
+
+# -- START -- #
+overview-*
+.overview-*
+
+rewrite-*
+.rewrite-*
+# -- END -- #
+
+HWID/
+*.csv
+
