@@ -1,19 +1,36 @@
 {
-	"_comment-0_"	:	"DO NOT MODIFY THIS FILE UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING.",
+	"_comment-0_"		:	"DO NOT MODIFY THIS FILE UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING.",
 
-	"root"			:	"\\",
-
-	"gwapi"			:	"C:\\Program Files\\WindowsPowerShell\\Scripts\\Get-WindowsAutoPilotInfo.ps1",
-
-	"directory"		:
+	"configData"		:	
 	{
-		"location"	:	"root",
-		"name"		:	"HWID"
+		"root"			:	"\\",
+		"gwapi"			:	"C:\\Program Files\\WindowsPowerShell\\Scripts\\Get-WindowsAutoPilotInfo.ps1",
+
+		"directory"		:
+		{
+			"location"	:	"root",
+			"name"		:	"HWID"
+		},
+
+		"output"		:
+		{
+			"extension"	:	".csv",
+			"regex"		:	"(\\d{12})"
+		}
 	},
 
-	"output"		:
+	"versions"			:
 	{
-		"extension"	:	".csv",
-		"regex"		:	"(\\d{12})"
+		"nuget"			:	
+		{
+			"min"		:	"2.8.5.208",
+			"max"		:	null
+		},
+	
+		"gwapi"			:	
+		{
+			"min"		:	"2.5",
+			"max"		:	null
+		}
 	}
 }
